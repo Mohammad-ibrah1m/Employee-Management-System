@@ -1,0 +1,46 @@
+/* Public CSS*/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.4s;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url(../fonts/Nunito/Nunito-VariableFont_wght.ttf);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Nunito';
+  font-weight: 700;
+}
+
+form {
+  box-shadow: 0 0 8px 1px #d3d3d3;
+}
+
+.form-control:focus,
+.btn:focus,
+.num:focus {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+.btn:focus {
+  border: none;
+}
+
+.btn i:hover {
+  color: #dc3545;
+}
+
+table td {
+  cursor: pointer;
+}
