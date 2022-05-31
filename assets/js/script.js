@@ -32,14 +32,28 @@ btn_add.addEventListener('click', function () {
 });
 
 function addEmployee() {
-  const employee = {
-    name: employeeName.value,
-    department: employeeDepartment.value,
-    age: employeeAge.value,
-    salary: employeeSalary.value,
-  };
-  employees.push(employee);
-  localStorage.setItem('Employees', JSON.stringify(employees));
+  let isEmpty = true;
+  for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].value != '') {
+      isEmpty = false;
+      inputs[i].classList.remove('is-invalid');
+      inputs[i].classList.add('is-valid');
+    } else {
+      isEmpty = true;
+      inputs[i].classList.remove('is-valid');
+      inputs[i].classList.add('is-invalid');
+    }
+  }
+  if (!isEmpty) {
+    const employee = {
+      name: employeeName.value,
+      department: employeeDepartment.value,
+      age: employeeAge.value,
+      salary: employeeSalary.value,
+    };
+    employees.push(employee);
+    localStorage.setItem('Employees', JSON.stringify(employees));
+  }
 }
 
 // display employees
@@ -103,8 +117,6 @@ function searchData() {
         </tr>`;
     }
   }
-  /* <td><button class="update btn" onclick="updateEmployee(${id})"> <i class="fa-regular fa-pen-to-square"></i></button></td>
-        <td><button class="delete btn" onclick="deleteEmployee(${id})"> <i class="fa-solid fa-user-xmark"></i></button></td> */
   employeesData.innerHTML = data;
 }
 
@@ -126,14 +138,20 @@ function update() {
   localStorage.setItem('Employees', JSON.stringify(employees));
 }
 
-let reg = new RegExp('^[A-Z][a-z]{2,8}$');
-let web = new RegExp('^([2-7][0-9]|80){2}$');
-let mob = new RegExp('^("+"|00)(970|972)[0-9]{9}$');
-let nx = new RegExp('^(mr)?Ahmad');
-let namex = 'Ahmad';
-let tested = '+970593050337';
-console.log(nx.test(namex));
-
-form.addEventListener('click', function (e) {
+form.addEventListener('submit', function (e) {
   e.preventDefault();
 });
+
+for (let i = 0; i < inputs.length; i++) {
+  inputs[i].addEventListener('keyup', check);
+}
+
+function check() {
+  if (this.value.length > 0) {
+    this.classList.add('is-valid');
+    this.classList.remove('is-invalid');
+  } else {
+    this.classList.add('is-invalid');
+    this.classList.remove('is-valid');
+  }
+}
